@@ -1,0 +1,46 @@
+img{
+  width: 300px;
+}
+.card-item{
+  display: flex ;
+  .sub-item1{
+    .sub-item1-1{
+      display: flex;
+      p{
+        margin-top: 30px;
+      }
+    }
+  }
+}
+.mat-card{
+margin-bottom: 50px;
+}
+.mat-list-item{
+  height: fit-content !important;
+}
+form{
+  max-width: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+
+  button{
+    width: fit-content;
+  }
+
+
+  mat-form-field.ng-invalid.ng-touched {
+    animation: example;
+    animation-duration: 0.3s;
+    margin-bottom: 10px;
+  }
+  @keyframes example {
+    from {
+      margin-bottom: 0;
+    }
+    to {
+      margin-bottom: 20px;
+    }
+  }
+}

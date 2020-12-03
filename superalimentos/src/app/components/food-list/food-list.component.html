@@ -1,0 +1,43 @@
+<label for="">Filte by name</label>
+<input matInput type="text" [(ngModel)]="texto">
+<br>
+<button style="margin-top: 10px;" mat-raised-button (click)="formFlag = !formFlag">Add New Food</button>
+<form [formGroup]="formGroup" *ngIf="formFlag" (ngSubmit)='saveRecord()'>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput name='name' formControlName="name" >
+    <mat-error><span>{{ getError('name')}}</span></mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>calorias</mat-label>
+    <input matInput type="number" name='calorias' formControlName="calorias" >
+    <mat-error><span>{{ getError('calorias')}}</span></mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>imagen</mat-label>
+    <input matInput name='imagen' formControlName="imagen" >
+    <mat-error><span>{{ getError('imagen')}}</span></mat-error>
+  </mat-form-field>
+  <button type="submit" mat-raised-button [disabled]="formGroup.invalid" >Add Food</button>
+
+</form>
+<mat-list>
+  <mat-list-item *ngFor="let item of items | filter :texto">
+    <mat-card>
+      <div class="card-item">
+        <img src="{{item.image}}" alt="">
+        <div class="sub-item1">
+          <div class="sub-item1-1">
+            <h2>{{item.name}}</h2>
+            <p>/{{item.calories}} Calorias</p>
+          </div>
+          <div>
+            <button mat-raised-button (click)="add(item)">+</button>
+            <input type="number" [(ngModel)]="item.quantity">
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+  </mat-list-item>
+</mat-list>
