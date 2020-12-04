@@ -14,16 +14,18 @@ export class FoodListComponent implements OnInit {
 
   texto:string = "";
   formFlag:boolean = false;
+
   formGroup : FormGroup;
+
+  todayFoodList: Food[] = [];
+  calories:number=0;
 
 
   constructor(private fb: FormBuilder) {}
-  todayFoodList: Food[] = [];
-  ngOnInit(): void {}
-
-  ngAfterViewInit(){
-    this.buildForm();
+  ngOnInit(): void {    this.buildForm();
   }
+
+
   private buildForm(){
 
     this.formGroup = this.fb.group({
@@ -46,12 +48,17 @@ export class FoodListComponent implements OnInit {
   }
   add(item) {
     if (item.quantity > 0) {
-      let index = this.checkIndexByName(item);
+      let index = this.checkIndexTodayListByName(item);
 
+      console.log(this.todayFoodList);
+      console.log(index);
       if (index != -1) {
         this.todayFoodList[index].quantity += item.quantity;
       } else {
-        this.todayFoodList.push(item);
+        //let copy :Food{name="",image="",quantity=0,calories=0};
+        let copy ={name:"",image:"",quantity:0,calories:0};
+        Object.assign(copy,item);
+        this.todayFoodList.push(copy);
       }
     }
   }
@@ -73,6 +80,11 @@ export class FoodListComponent implements OnInit {
 
   checkIndexByName(item) {
     let index = this.items.findIndex((data) => item.name == data.name);
+
+    return index;
+  }
+  checkIndexTodayListByName(item) {
+    let index = this.todayFoodList.findIndex((data) => item.name == data.name);
 
     return index;
   }

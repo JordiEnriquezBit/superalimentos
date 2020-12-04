@@ -1,45 +1,55 @@
-<label for="">Filte by name</label>
-<input  type="text" [(ngModel)]="texto" style="margin-bottom: 10px;">
-<br>
-<button  mat-raised-button (click)="formFlag = !formFlag">Add New Food</button>
-<form [formGroup]="formGroup" *ngIf="formFlag" (ngSubmit)='saveRecord()'>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput name='name' formControlName="name" >
-    <mat-error><span>{{ getError('name')}}</span></mat-error>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>calorias</mat-label>
-    <input matInput type="number" name='calories' formControlName="calories" >
-    <mat-error><span>{{ getError('calories')}}</span></mat-error>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>imagen</mat-label>
-    <input matInput name='image' formControlName="image" >
-    <mat-error><span>{{ getError('image')}}</span></mat-error>
-  </mat-form-field>
-  <button type="submit"  mat-raised-button [disabled]="formGroup.invalid" >Add Food</button>
+<div class="container">
+  <div>
+    <label for="">Filte by name</label>
+    <input type="text" [(ngModel)]="texto" style="margin-bottom: 10px;">
+    <br>
+    <button mat-raised-button (click)="formFlag = !formFlag">Add New Food</button>
+    <form [formGroup]="formGroup" *ngIf="formFlag" (ngSubmit)='saveRecord()'>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput name='name' formControlName="name">
+        <mat-error><span>{{ getError('name')}}</span></mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>calorias</mat-label>
+        <input matInput type="number" name='calories' formControlName="calories">
+        <mat-error><span>{{ getError('calories')}}</span></mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>imagen</mat-label>
+        <input matInput name='image' formControlName="image">
+        <mat-error><span>{{ getError('image')}}</span></mat-error>
+      </mat-form-field>
+      <button type="submit" mat-raised-button [disabled]="formGroup.invalid">Add Food</button>
 
-</form>
+    </form>
 
 
-<mat-list>
-  <mat-list-item  *ngFor="let item of items | filter :texto" >
-    <mat-card>
-      <div class="card-item">
-        <img src="{{item.image}}" alt="">
-        <div class="sub-item1">
-          <div class="sub-item1-1">
-            <h2>{{item.name}}</h2>
-            <p>/{{item.calories}} Calorias</p>
+    <mat-list>
+      <mat-list-item *ngFor="let item of items | filter :texto">
+        <mat-card>
+          <div class="card-item">
+            <img src="{{item.image}}" alt="">
+            <div class="sub-item1">
+              <div class="sub-item1-1">
+                <h2>{{item.name}}</h2>
+                <p>/{{item.calories}} Calorias</p>
+              </div>
+              <div>
+                <button mat-raised-button (click)="add(item)">+</button>
+                <input type="number" [(ngModel)]="item.quantity">
+              </div>
+            </div>
           </div>
-          <div>
-            <button mat-raised-button (click)="add(item)">+</button>
-            <input type="number" [(ngModel)]="item.quantity">
-          </div>
-        </div>
-      </div>
-    </mat-card>
+        </mat-card>
 
-  </mat-list-item>
-</mat-list>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div>
+    <h2>Today's Food{{calories}} cal</h2>
+    <ul>
+      <li *ngFor="let item of todayFoodList">{{item.name}} {{item.calories}} <span *ngIf="item.quantity>1"> x{{item.quantity}}</span></li>
+    </ul>
+  </div>
+</div>

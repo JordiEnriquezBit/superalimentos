@@ -1,3 +1,7 @@
+.container{
+  display: flex;
+
+}
 img{
   width: 200px;
   border-radius: 50%;
@@ -32,7 +36,7 @@ form{
     width: fit-content;
   }
 
-/*
+
   mat-form-field.ng-invalid.ng-touched {
     animation: example;
     animation-duration: 0.3s;
@@ -46,5 +50,5 @@ form{
       margin-bottom: 20px;
     }
   }
-  */
+
 }
