@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FoodListComponent implements OnInit {
 
   items: Food[] = foods;
+
   texto:string = "";
   formFlag:boolean = false;
   formGroup : FormGroup;
@@ -27,8 +28,9 @@ export class FoodListComponent implements OnInit {
 
     this.formGroup = this.fb.group({
       name: ['', [Validators.required]],
-      calorias: ['', [Validators.required]],
-      imagen:['', [Validators.required]]
+      calories: ['', [Validators.required]],
+      image:['', [Validators.required]],
+      quantity:[1,[]]
 
     });
   }
@@ -55,8 +57,20 @@ export class FoodListComponent implements OnInit {
   }
 
   saveRecord(){
+    let item = this.formGroup.value;
 
+    if (item.quantity > 0) {
+      let index = this.checkIndexByName(item);
+
+      if (index == -1) {
+        item.image ="https://farm5.staticflickr.com/4363/36346283311_74018f6e7d_o.png";
+        this.items.push(item);
+        this.texto="";
+        console.log(this.items)
+      }
+    }
   }
+
   checkIndexByName(item) {
     let index = this.items.findIndex((data) => item.name == data.name);
 

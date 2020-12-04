@@ -1,5 +1,7 @@
 img{
-  width: 300px;
+  width: 200px;
+  border-radius: 50%;
+  margin-right: 50px;
 }
 .card-item{
   display: flex ;
@@ -18,6 +20,7 @@ margin-bottom: 50px;
 .mat-list-item{
   height: fit-content !important;
 }
+
 form{
   max-width: fit-content;
 
@@ -29,7 +32,7 @@ form{
     width: fit-content;
   }
 
-
+/*
   mat-form-field.ng-invalid.ng-touched {
     animation: example;
     animation-duration: 0.3s;
@@ -43,4 +46,5 @@ form{
       margin-bottom: 20px;
     }
   }
+  */
 }
