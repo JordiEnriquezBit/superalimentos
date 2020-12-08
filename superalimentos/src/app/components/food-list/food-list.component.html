@@ -47,7 +47,7 @@
     </mat-list>
   </div>
   <div>
-    <h2>Today's Food{{calories}} cal</h2>
+    <h2>Today's Food {{calories}} cal</h2>
     <ul>
       <li *ngFor="let item of todayFoodList">{{item.name}} {{item.calories}} <span *ngIf="item.quantity>1"> x{{item.quantity}}</span></li>
     </ul>

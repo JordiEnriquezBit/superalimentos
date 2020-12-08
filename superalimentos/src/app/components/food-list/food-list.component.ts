@@ -30,10 +30,16 @@ export class FoodListComponent implements OnInit {
 
     this.formGroup = this.fb.group({
       name: ['', [Validators.required]],
-      calories: ['', [Validators.required]],
-      image:['', [Validators.required]],
+      calories: ['', [Validators.required,Validators.min(1)]],
+      image:['', []],
       quantity:[1,[]]
 
+    });
+  }
+  calculateCalories(){
+    this.calories = 0;
+    this.todayFoodList.map(food=>{
+      this.calories += food.calories * food.quantity;
     });
   }
 
@@ -47,11 +53,9 @@ export class FoodListComponent implements OnInit {
     return error;
   }
   add(item) {
+
     if (item.quantity > 0) {
       let index = this.checkIndexTodayListByName(item);
-
-      console.log(this.todayFoodList);
-      console.log(index);
       if (index != -1) {
         this.todayFoodList[index].quantity += item.quantity;
       } else {
@@ -61,6 +65,7 @@ export class FoodListComponent implements OnInit {
         this.todayFoodList.push(copy);
       }
     }
+    this.calculateCalories();
   }
 
 
@@ -74,8 +79,11 @@ export class FoodListComponent implements OnInit {
         item.image ="https://farm5.staticflickr.com/4363/36346283311_74018f6e7d_o.png";
         this.items.push(item);
         this.texto="";
-        console.log(this.items)
       }
+    }
+    if (this.formFlag) {
+      this.formGroup.reset();
+      this.formFlag=false;
     }
   }
 
